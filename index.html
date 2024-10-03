@@ -12,14 +12,10 @@
             background: transparent; /* Fully transparent background */
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Aligns content to the top */
+            align-items: center;
         }
 
         .overlay {
-            position: fixed; /* Fixed position to keep it at the top */
-            top: 0; /* Aligns the overlay to the top of the viewport */
-            left: 50%; /* Centers the overlay horizontally */
-            transform: translateX(-50%); /* Adjusts for centering */
             display: flex;
             flex-direction: column;
             background: rgba(128, 128, 128, 0.7); /* Gray transparent background */
@@ -27,7 +23,6 @@
             overflow: hidden; /* Prevents overflow of content */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optional shadow for depth */
             max-width: 300px; /* Maximum width for the overlay */
-            width: 100%; /* Allows for full-width overlay */
             opacity: 0; /* Start hidden */
             transition: opacity 1s; /* Smooth transition for fade-in */
         }
