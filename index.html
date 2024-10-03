@@ -13,6 +13,8 @@
       justify-content: center;
       align-items: center;
       background-color: #000;
+      color: white; /* Added for text color */
+      overflow: hidden; /* Prevent scrolling when blank */
     }
 
     #image-container {
@@ -28,7 +30,9 @@
     #image-container img {
       max-width: 100%;
       max-height: 100%;
-      display: none;
+      opacity: 0; /* Start as transparent */
+      transition: opacity 1s ease; /* Fade transition */
+      position: absolute; /* Positioning to allow proper fading */
     }
 
     #overlay {
@@ -66,6 +70,15 @@
     const imageElement = document.getElementById('image');
     const overlayElement = document.getElementById('overlay');
 
+    // Function to fade out the image
+    function fadeOutImage() {
+      imageElement.style.opacity = '0'; // Start fading out
+      setTimeout(() => {
+        imageElement.style.display = 'none'; // Hide the image
+        overlayElement.style.display = 'flex'; // Show overlay when no image
+      }, 1000); // Duration of fade out
+    }
+
     // Listen for new image URLs on the 'new-image' event
     channel.subscribe('new-image', function(message) {
       const imageUrl = message.data.imageUrl;
@@ -73,9 +86,15 @@
       // Set the new image URL and display the image
       imageElement.src = imageUrl;
       imageElement.style.display = 'block';
+      overlayElement.style.display = 'none'; // Hide overlay
 
-      // Remove the overlay text once the image is received
-      overlayElement.style.display = 'none';
+      // Trigger fade in
+      setTimeout(() => {
+        imageElement.style.opacity = '1'; // Fade in
+      }, 10); // Small timeout to allow display change
+
+      // Set a timeout to fade out after 10 seconds
+      setTimeout(fadeOutImage, 10000); // Stay for 10 seconds then fade out
     });
   </script>
 
