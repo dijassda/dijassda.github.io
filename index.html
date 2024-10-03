@@ -9,6 +9,7 @@
             margin: 0;
             padding: 0;
             height: 100vh;
+            width: 100vw; /* Full width */
             background: transparent; /* Fully transparent background */
             display: flex;
             justify-content: center;
@@ -22,7 +23,11 @@
             border-radius: 20px; /* Modern curved effect */
             overflow: hidden; /* Prevents overflow of content */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optional shadow for depth */
-            max-width: 300px; /* Maximum width for the overlay */
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            position: absolute; /* Position it absolutely */
+            top: 0; /* Align to the top */
+            left: 0; /* Align to the left */
             opacity: 0; /* Start hidden */
             transition: opacity 1s; /* Smooth transition for fade-in */
         }
@@ -51,6 +56,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-grow: 1; /* Allow this section to take remaining space */
             padding: 10px; /* Reduced padding for a smaller overlay */
         }
 
