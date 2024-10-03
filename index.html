@@ -11,8 +11,8 @@
             height: 100vh;
             background: transparent; /* Fully transparent background */
             display: flex;
-            justify-content: center;
-            align-items: center;
+            justify-content: flex-start; /* Align items to the left */
+            align-items: flex-end; /* Align items to the bottom */
         }
 
         .overlay {
@@ -25,6 +25,7 @@
             opacity: 0; /* Start hidden */
             max-width: 60vh;
             transition: opacity 1s; /* Smooth transition for fade-in */
+            margin: 20px; /* Add margin for spacing from edges */
         }
 
         .top-section {
