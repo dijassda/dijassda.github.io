@@ -25,6 +25,9 @@
       align-items: center;
       opacity: 0; /* Start hidden */
       transition: opacity 1s;
+      background-color: rgba(128, 128, 128, 0.5); /* Grey overlay background */
+      border-radius: 10px; /* Optional: rounded corners */
+      overflow: hidden; /* Ensure the image does not overflow */
     }
 
     #image-container img {
@@ -33,6 +36,7 @@
       display: none; /* Hide initially */
       opacity: 0; /* Start hidden */
       transition: opacity 1s;
+      border-radius: 10px; /* Match the image corners with the container */
     }
 
     #overlay {
@@ -49,6 +53,8 @@
       font-size: 24px;
       text-align: center;
       z-index: 10;
+      opacity: 1; /* Start visible */
+      transition: opacity 1s;
     }
   </style>
 </head>
@@ -82,7 +88,7 @@
       // Fade in the image container
       imageContainer.style.opacity = '1';
       imageElement.style.opacity = '1';
-      overlayElement.style.display = 'none';
+      overlayElement.style.opacity = '0'; // Hide overlay when image is shown
 
       // Set a timeout to fade out the image after 10 seconds
       setTimeout(() => {
@@ -93,7 +99,7 @@
         // Wait for the fade-out transition to complete before hiding the image
         setTimeout(() => {
           imageElement.style.display = 'none'; // Hide image
-          overlayElement.style.display = 'flex'; // Show overlay text again
+          overlayElement.style.opacity = '1'; // Show overlay text again
         }, 1000); // Match the fade-out duration (1 second)
       }, 10000); // Show the image for 10 seconds
     });
