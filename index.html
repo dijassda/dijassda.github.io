@@ -8,67 +8,75 @@
         body {
             margin: 0;
             padding: 0;
-            height: 100vh; /* Changed height for testing overflow */
-            background: transparent; /* Fully transparent background */
+            height: 100vh;
+            background: transparent;
             display: flex;
-            justify-content: flex-end; /* Align items to the right */
-            align-items: flex-end; /* Align items to the bottom */
+            justify-content: flex-end;
+            align-items: flex-end;
             overflow: hidden; /* Prevent scrolling */
         }
 
         .overlay {
             display: flex;
             flex-direction: column;
-            background: rgba(128, 128, 128, 0.7); /* Gray transparent background */
-            border-radius: 20px; /* Modern curved effect */
-            overflow: hidden; /* Prevents overflow of content */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optional shadow for depth */
-            opacity: 0; /* Start hidden */
+            background: rgba(128, 128, 128, 0.7);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            opacity: 0;
             max-width: 60vh;
-            transition: opacity 1s; /* Smooth transition for fade-in */
-            margin: 20px; /* Add margin for spacing from edges */
+            transition: opacity 1s;
+            margin: 20px;
         }
 
         .top-section {
             display: flex;
             align-items: center;
-            padding: 10px; /* Reduced padding for a smaller overlay */
+            padding: 10px;
         }
 
         .profile-pic {
-            width: 40px; /* Size of the profile picture */
+            width: 40px;
             height: 40px;
-            border-radius: 50%; /* Circular profile picture */
+            border-radius: 50%;
             margin-right: 10px;
             background-size: cover;
             background-position: center;
         }
 
         .username {
-            font-size: 18px; /* Font size for the username */
-            color: white; /* Username color */
+            font-size: 18px;
+            color: white;
         }
 
         .message {
-            font-size: 18px; /* Font size for the message */
-            color: white; /* Message color */
-            margin-top: 5px; /* Space between username and message */
+            font-size: 14px;
+            color: white;
+            margin-top: 5px;
         }
 
         .bottom-section {
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 10px; /* Reduced padding for a smaller overlay */
+            padding: 10px;
         }
 
         .bottom-section img {
-            max-width: 100%; /* Ensures the image fits within the section */
-            height: auto; /* Maintain aspect ratio */
-            object-fit: contain; /* Ensures the image scales without being cut off */
-            border-radius: 10px; /* Optional rounded corners for the image */
-            opacity: 0; /* Start hidden */
-            transition: opacity 1s; /* Smooth transition for fade-in */
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 10px;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .footer {
+            font-size: 12px;
+            text-align: center;
+            color: white;
+            padding: 5px;
+            background: rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
@@ -84,6 +92,9 @@
         <div class="bottom-section">
             <img src="" alt="Image" id="dynamic-image"> <!-- Dynamic Image -->
         </div>
+        <div class="footer" id="footer">
+            Sent from Nick White Discord - channelName
+        </div>
     </div>
 
     <script src="https://cdn.ably.io/lib/ably.min-1.js"></script>
@@ -98,24 +109,28 @@
         const profilePicElement = document.getElementById('profile-pic');
         const usernameElement = document.getElementById('username');
         const imageElement = document.getElementById('dynamic-image');
-        const messageElement = document.getElementById('message'); // New message element
+        const messageElement = document.getElementById('message');
+        const footerElement = document.getElementById('footer');
 
         // Listen for new image URLs on the 'new-image' event
         channel.subscribe('new-image', function(message) {
             const imageUrl = message.data.imageUrl;
-            const username = message.data.username; // Get the username from the message
-            const profileImageUrl = message.data.profileImageUrl; // Get the profile image URL
-            const userMessage = message.data.messageContent; // Get the user message from the message
+            const username = message.data.username;
+            const profileImageUrl = message.data.profileImageUrl;
+            const userMessage = message.data.message;
+            const channelName = message.data.channelName; // Get the channel name
 
-            // Update the profile image and username
-            profilePicElement.style.backgroundImage = `url(${profileImageUrl})`; // Set the profile image
-            usernameElement.textContent = username; // Set the username
-            messageElement.textContent = userMessage; // Set the message below the username
-            
+            // Update the profile image, username, and message
+            profilePicElement.style.backgroundImage = `url(${profileImageUrl})`;
+            usernameElement.textContent = username;
+            messageElement.textContent = userMessage;
+
+            // Set the footer with the channel name
+            footerElement.textContent = `Sent from Nick White Discord - ${channelName}`;
+
             // Set the new image URL and display the image
             imageElement.src = imageUrl;
             imageElement.onload = () => {
-                // Show the overlay and fade in the image
                 overlayElement.style.opacity = '1';
                 imageElement.style.opacity = '1'; // Fade in the image
 
@@ -126,7 +141,7 @@
                 setTimeout(() => {
                     overlayElement.style.opacity = '0'; // Hide overlay
                     imageElement.style.opacity = '0'; // Hide image
-                    
+
                     // Restore body scrolling
                     document.body.style.overflow = 'auto';
                 }, 10000); // Show the image for 10 seconds
