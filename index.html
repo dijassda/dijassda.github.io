@@ -95,7 +95,7 @@
             const profileImageUrl = message.data.profileImageUrl; // Get the profile image URL
 
             // Update the profile image and username
-            profilePicElement.style.backgroundImage = url(${profileImageUrl}); // Set the profile image
+            profilePicElement.style.backgroundImage = `url(${profileImageUrl})`; // Set the profile image
             usernameElement.textContent = username; // Set the username
             
             // Set the new image URL and display the image
