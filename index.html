@@ -8,11 +8,12 @@
         body {
             margin: 0;
             padding: 0;
-            height: 120vh;
+            height: 120vh; /* Changed height for testing overflow */
             background: transparent; /* Fully transparent background */
             display: flex;
             justify-content: flex-end; /* Align items to the right */
             align-items: flex-end; /* Align items to the bottom */
+            overflow: hidden; /* Prevent scrolling */
         }
 
         .overlay {
@@ -106,10 +107,16 @@
                 overlayElement.style.opacity = '1';
                 imageElement.style.opacity = '1'; // Fade in the image
 
+                // Prevent body scrolling
+                document.body.style.overflow = 'hidden';
+
                 // Set a timeout to fade out the image and overlay after 10 seconds
                 setTimeout(() => {
                     overlayElement.style.opacity = '0'; // Hide overlay
                     imageElement.style.opacity = '0'; // Hide image
+                    
+                    // Restore body scrolling
+                    document.body.style.overflow = 'auto';
                 }, 10000); // Show the image for 10 seconds
             };
         });
