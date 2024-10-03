@@ -12,9 +12,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #000;
-      color: white; /* Added for text color */
-      overflow: hidden; /* Prevent scrolling when blank */
+      background-color: white; /* Change background to white */
+      color: white; /* Text color */
+      overflow: hidden; /* Prevent scrolling */
     }
 
     #image-container {
@@ -25,6 +25,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      visibility: hidden; /* Start as hidden */
     }
 
     #image-container img {
@@ -49,6 +50,7 @@
       font-size: 24px;
       text-align: center;
       z-index: 10;
+      visibility: hidden; /* Hide overlay initially */
     }
   </style>
 </head>
@@ -69,13 +71,15 @@
 
     const imageElement = document.getElementById('image');
     const overlayElement = document.getElementById('overlay');
+    const imageContainer = document.getElementById('image-container');
 
     // Function to fade out the image
     function fadeOutImage() {
       imageElement.style.opacity = '0'; // Start fading out
       setTimeout(() => {
         imageElement.style.display = 'none'; // Hide the image
-        overlayElement.style.display = 'flex'; // Show overlay when no image
+        overlayElement.style.visibility = 'visible'; // Show overlay
+        imageContainer.style.visibility = 'hidden'; // Hide the image container
       }, 1000); // Duration of fade out
     }
 
@@ -86,7 +90,8 @@
       // Set the new image URL and display the image
       imageElement.src = imageUrl;
       imageElement.style.display = 'block';
-      overlayElement.style.display = 'none'; // Hide overlay
+      overlayElement.style.visibility = 'hidden'; // Hide overlay
+      imageContainer.style.visibility = 'visible'; // Show image container
 
       // Trigger fade in
       setTimeout(() => {
