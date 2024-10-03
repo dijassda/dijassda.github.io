@@ -9,27 +9,33 @@
             margin: 0;
             padding: 0;
             height: 100vh;
-            width: 100vw; /* Ensure the body takes the full width */
             background: transparent; /* Fully transparent background */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to the top */
         }
 
         .overlay {
             display: flex;
             flex-direction: column;
             background: rgba(128, 128, 128, 0.7); /* Gray transparent background */
-            border-radius: 0; /* No rounded corners to fill the entire screen */
+            border-radius: 20px; /* Modern curved effect */
             overflow: hidden; /* Prevents overflow of content */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optional shadow for depth */
-            width: 100vw; /* Full width */
-            height: 100vh; /* Full height */
+            max-width: 300px; /* Maximum width for the overlay */
+            width: 100%; /* Full width */
+            height: auto; /* Height adjusts based on content */
             opacity: 0; /* Start hidden */
             transition: opacity 1s; /* Smooth transition for fade-in */
+            position: absolute; /* Position overlay to cover the full page */
+            top: 0; /* Align to the top */
+            left: 0; /* Align to the left */
         }
 
         .top-section {
             display: flex;
             align-items: center;
-            padding: 10px; /* Padding for the top section */
+            padding: 10px; /* Reduced padding for a smaller overlay */
         }
 
         .profile-pic {
