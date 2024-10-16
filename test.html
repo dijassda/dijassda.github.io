@@ -63,17 +63,16 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-grow: 1;
             padding: 20px;
             width: 100%;
-            height: calc(100% - 240px); /* Ensure the image stays well above the footer */
+            height: 50%; /* Adjusted to move the image higher */
         }
         
         .bottom-section img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain; /* Maintain aspect ratio */
-            border-radius: 10px;
+            border-radius: 20px;
             opacity: 0;
             transition: opacity 1s;
         }
@@ -88,10 +87,13 @@
             bottom: 0;
             width: 100%;
         }
+
+        
     </style>
 </head>
 <body>
-    <div class="overlay" id="overlay"><!-- Transparent logo at the top middle -->
+    <div class="overlay" id="overlay">
+         <!-- Transparent logo at the top middle -->
         <div class="top-section">
             <div class="profile-pic" id="profile-pic" style="background-image: url('https://via.placeholder.com/40');"></div>
             <div>
